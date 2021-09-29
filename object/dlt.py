@@ -1,4 +1,4 @@
-from lottery import Lottery
+from object.lottery import Lottery
 
 from bs4 import BeautifulSoup   #引用BeautifulSoup库
 import requests                 #引用requests
@@ -63,6 +63,6 @@ class DLT(Lottery):
                 dic[num] += 1
         return dic
 
-    
+
 
    
