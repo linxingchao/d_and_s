@@ -47,8 +47,8 @@ class DLT(Lottery):
 
     def red_numbers_appear_times(self): 
         dic = {}
-        for i in range(1,37): 
-            dic[i] = []
+        for i in range(1,36): 
+            dic[i] = 0
         for numbers in self.__red_numbers: 
             for num in numbers: 
                 dic[num] += 1
