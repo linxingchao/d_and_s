@@ -1,6 +1,7 @@
 from object.dlt import DLT
 from object.ssq import SSQ
 from os import path
+import csv
 
 def dlt_theory_appear_times(end,periods): 
     dlt = DLT(1,end)
@@ -29,6 +30,19 @@ def dlt_theory_appear_times(end,periods):
 if __name__ == '__main__': 
     dlt = DLT(1,21113)
     dlt.search_data_from_net()
-    print(dlt.red_numbers_appear_times())
-    print(len(dlt.Blue_Numbers))
-    print(dlt_theory_appear_times(21113,20))
+    
+    dataList = []
+    for i in range(0,dlt.Count): 
+        data = [i]
+        for index in range(5): 
+            data.append(dlt.Red_Numbers[i][index])
+        data.append(dlt.Blue_Numbers[i][0])
+        data.append(dlt.Blue_Numbers[i][1])
+        dataList.append(data)
+    with open("Lottery_data.csv",'w') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['期号','号码1', '号码2', '号码3', '号码4', '号码5', '号码6', '号码7'])
+        writer.writerows(dataList)
+
+
+  
