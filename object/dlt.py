@@ -1,3 +1,4 @@
+from typing import Counter
 from object.lottery import Lottery
 
 from bs4 import BeautifulSoup   #引用BeautifulSoup库
@@ -8,9 +9,77 @@ import csv
 import codecs
 import collections
 
+thoery_data = {
+    'red':{
+        1:{
+            0:5,1:1
+        },
+        2:{
+            0:5,1:2
+        },
+        3:{
+            0:5,1:3,2:1
+        },
+        4:{
+            0:4,1:3,2:1
+        },
+        5:{
+            0:4,1:3,2:1,3:1
+        },
+        6:{
+            0:3,1:3,2:2,3:1
+        },
+        7:{
+            0:3,1:3,2:2,3:1
+        },
+        8:{
+            0:3,1:3,2:2,3:1
+        },
+        9:{
+            0:3,1:4,2:3,3:1
+        },
+        10:{
+            0:3,1:3,2:2,3:1,4:1
+        },
+        11:{
+            0:2,1:3,2:2,3:2,4:1
+        },
+        12:{
+            0:2,1:3,2:3,3:2,4:1
+        },
+        13:{
+            0:1,1:3,2:3,3:2,4:1
+        },
+        14:{
+            0:1,1:2,2:3,3:2,4:1
+        },
+        15:{
+            0:1,1:2,2:2,3:2,4:1,5:1
+        },
+        16:{
+            0:1,1:2,2:2,3:2,4:1,5:1
+        },
+        17:{
+            0:1,1:2,2:2,3:2,4:1,5:1,6:1
+        },
+        18:{
+            0:1,1:2,2:2,3:2,4:2,5:1
+        },
+        19:{
+            0:1,1:2,2:3,3:3,4:2,5:1,6:1
+        },
+        20:{
+            0:1,1:2,2:3,3:3,4:2,5:1,6:1
+        }
+    },
+    'blue':{
+
+    }
+}
+
 class DLT(Lottery): 
-    def __init__(self,start,end): 
-        self.__url = 'http://datachart.500.com/dlt/history/newinc/history.php?start=%s&end=%s' % (start,end)
+    def __init__(self): 
+        #self.__url = 'http://datachart.500.com/dlt/history/newinc/history.php?start=%s&end=%s' % (start,end)
         self.__red_numbers = []
         self.__blue_numbers = []
         self.__count = 0
@@ -27,9 +96,9 @@ class DLT(Lottery):
     def Count(self): 
         return self.__count
 
-
-    def search_data_from_net(self):
-        r = requests.get(self.__url)                     
+    def search_data_from_net(self,start,end):
+        url = 'http://datachart.500.com/dlt/history/newinc/history.php?start=%s&end=%s' % (start,end)
+        r = requests.get(url)                     
         r.encoding='utf-8'
         text=r.text
         soup = BeautifulSoup(text, "html.parser")
@@ -49,8 +118,16 @@ class DLT(Lottery):
         self.__red_numbers = red_numbers
         self.__count = count
 
-    def search_data_from_csv(self):
-        pass
+    def search_data_from_csv(self,csv_file):
+        with open(csv_file,'r') as csvfile: 
+            reader = csv.reader(csvfile)
+            print(reader)
+            for row in reader: 
+                if row and row[0] != '期号':
+                    self.__count += 1
+                    self.__red_numbers.append([int(row[1]),int(row[2]),int(row[3]),int(row[4]),int(row[5])])
+                    self.__blue_numbers.append([int(row[6]),int(row[7])])
+
 
     def red_numbers_appear_times(self): 
         dic = {}
@@ -75,7 +152,7 @@ class DLT(Lottery):
         if mode == 'red': 
             data = self.__red_numbers[0:periods]
             for i in range(1,36): 
-                Dic[i] = 0
+                 Dic[i] = 0
         elif mode == 'blue': 
             data = self.__blue_numbers[:periods]
             for i in range(1,13): 
@@ -111,6 +188,40 @@ class DLT(Lottery):
                     returnDic[key] = 0
                 returnDic[key] += value
         return returnDic
+
+    def search_frency_from_last(self,index,periods,mode='red'):
+        beegoFlag = False
+        if mode == 'red': 
+            current_red = self.__red_numbers[index]
+            last_data = self.__red_numbers[index+1:index+periods+1]
+        elif mode == 'blue':
+            current_red = self.__blue_numbers[index]
+            last_data = self.__blue_numbers[index+1:index+periods+1]
+        thoery_data_frency = thoery_data[mode][periods]
+        returnDic = {}
+        for num in current_red: 
+            returnDic[num] = 0
+        for data in last_data: 
+            for num in current_red: 
+                if num in data: 
+                    returnDic[num] += 1
+        returnList = []
+        for _,value in returnDic.items():
+            returnList.append(value)
+        counter = Counter(returnList)
+        beegoFlag = True
+        for key,value in counter.items(): 
+            if key in thoery_data_frency.keys() and value <= thoery_data_frency[key]:
+                pass
+            else: 
+                beegoFlag = False
+                break
+        return current_red,returnList,beegoFlag
+
+
+
+
+
     
     def number_last_appear_theory_times(self,periods,mode='red'): 
         dic = self.numbers_last_appear_times_probability(periods,mode)
