@@ -77,7 +77,7 @@ if __name__ == '__main__':
         data17 = dlt.search_frency_from_last(i,17)
         data16 = dlt.search_frency_from_last(i,16)
         data19 = dlt.search_frency_from_last(i,19)
-        if data4[2] and data5[2] and data6[2] and data7[2] \
+        if data5[2] and data6[2] and data7[2] \
             and data8[2] and data9[2] and data10[2]: 
             count += 1
     print(count)
@@ -125,6 +125,7 @@ if __name__ == '__main__':
     data5_0 = data5[0]
     data5_1 = data5[1]
     data5_2 = data5[2]
+    data5_3 = data5[3]
 
     data6_0 = data6[0]
     data6_1 = data6[1]
@@ -176,36 +177,38 @@ if __name__ == '__main__':
     result_data4_1 = list(combinations(data4_1,3))
     result_data4_2 = list(combinations(data4_2,1))
     
-    result_data5_0 = list(combinations(data5_0,4))
+    result_data5_0 = list(combinations(data5_0,3))
     result_data5_1 = list(combinations(data5_1,3))
     result_data5_2 = list(combinations(data5_2,1))
+    result_data5_3 = list(combinations(data5_3,1))
     
 
-    numbers_data4 = []
-    for num4_0 in result_data4_0:
-        for num4_1 in result_data4_1:
-            for num4_2 in result_data4_2:
-                nums = num4_0 + num4_1 + num4_2
-                numbers_data4.append(tuple(sorted(nums)))
-    print({4:len(numbers_data4)})
+    # numbers_data4 = []
+    # for num4_0 in result_data4_0:
+    #     for num4_1 in result_data4_1:
+    #         for num4_2 in result_data4_2:
+    #             nums = num4_0 + num4_1 + num4_2
+    #             numbers_data4.append(tuple(sorted(nums)))
+    # print({4:len(numbers_data4)})
 
     numbers_data5 = []
     for num5_0 in result_data5_0: 
         for num5_1 in result_data5_1: 
             for num5_2 in result_data5_2: 
-                nums = num5_0 + num5_1 + num5_2
-                numbers_data5.append(tuple(sorted(nums)))
+                for num5_3 in result_data5_3: 
+                    nums = num5_0 + num5_1 + num5_2 + num5_3
+                    numbers_data5.append(tuple(sorted(nums)))
 
     print({5:len(numbers_data5)})
 
-    pd_4 = pandas.Index(numbers_data4)
+    #pd_4 = pandas.Index(numbers_data4)
     pd_5 = pandas.Index(numbers_data5)
     numbers_data5 = None
     numbers_data4 = None
-    share_4_5 = pd_4 & pd_5
-    pd_4 = None
-    pd_5 = None
-    print(len(share_4_5))
+    # share_4_5 = pd_4 & pd_5
+    #pd_4 = None
+    #pd_5 = None
+    # print(len(share_4_5))
 
     
     
@@ -313,7 +316,7 @@ if __name__ == '__main__':
     numbers_data9 = None
     numbers_data10 = None
 
-    share_6_7_8_9_10 = pd_6 & pd_7 & pd_8 & pd_9 & pd_10
+    share_6_7_8_9_10 = pd_5 & pd_6 & pd_7 & pd_8 & pd_9 & pd_10
     pd_6 = None
     pd_7 = None
     pd_8 = None
@@ -324,7 +327,7 @@ if __name__ == '__main__':
     # temp_list1 = list(share_4_5)
     # temp_list2 = list(share_6_7_8_9_10)
 
-    shareFinal = share_4_5 & share_6_7_8_9_10
+    #shareFinal = share_4_5 & share_6_7_8_9_10
 
     print({'final': len(shareFinal)})
 
