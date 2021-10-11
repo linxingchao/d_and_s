@@ -77,7 +77,8 @@ if __name__ == '__main__':
         data17 = dlt.search_frency_from_last(i,17)
         data16 = dlt.search_frency_from_last(i,16)
         data19 = dlt.search_frency_from_last(i,19)
-        if data5[2] and data6[2] and data7[2] \
+        data11 = dlt.search_frency_from_last(i,11)
+        if data11[2] and data6[2] and data7[2] \
             and data8[2] and data9[2] and data10[2]: 
             count += 1
     print(count)
@@ -107,6 +108,7 @@ if __name__ == '__main__':
     data8 = dlt.numbers_appear_time_in_last_periods(8)
     data9 = dlt.numbers_appear_time_in_last_periods(9)
     data10 = dlt.numbers_appear_time_in_last_periods(10)
+    data11 = dlt.numbers_appear_time_in_last_periods(11)
     # data19 = dlt.numbers_appear_time_in_last_periods(19)
     # print(5,data5)
     # print(6,data6)
@@ -125,7 +127,7 @@ if __name__ == '__main__':
     data5_0 = data5[0]
     data5_1 = data5[1]
     data5_2 = data5[2]
-    data5_3 = data5[3]
+   # data5_3 = data5[3]
 
     data6_0 = data6[0]
     data6_1 = data6[1]
@@ -152,88 +154,46 @@ if __name__ == '__main__':
     data10_2 = data10[2]
     data10_3 = data10[3]
 
-    # data7_0 = data7[0]
-    # data7_1 = data7[1]
-    # data7_2 = data7[2]
-
-    # # data12_0 = data12[0]
-    # # data12_1 = data12[1]
-    # # data12_2 = data12[2]
-    # # data12_3 = data12[3]
-
-    # # data19_0 = data19[0]
-    # # data19_1 = data19[1]
-    # # data19_2 = data19[2]
-    # # data19_3 = data19[3]
-    # # data19_4 = data19[4]
-    # # data19_5 = data19[5]
-    # # data19_6 = data19[6]
-
-    # # data6_0_len = len(data6_0)
-    # # data6_1_len = len(data6_1)
-    # # data6_2_len = len(data6_2)
+    data11_0 = data11[0]
+    data11_1 = data11[1]
+    data11_2 = data11[2]
+    data11_3 = data11[3]
 
     result_data4_0 = list(combinations(data4_0,4))
     result_data4_1 = list(combinations(data4_1,3))
     result_data4_2 = list(combinations(data4_2,1))
     
-    result_data5_0 = list(combinations(data5_0,3))
+    result_data5_0 = list(combinations(data5_0,4))
     result_data5_1 = list(combinations(data5_1,3))
     result_data5_2 = list(combinations(data5_2,1))
-    result_data5_3 = list(combinations(data5_3,1))
+    #result_data5_3 = list(combinations(data5_3,1))
     
 
-    # numbers_data4 = []
-    # for num4_0 in result_data4_0:
-    #     for num4_1 in result_data4_1:
-    #         for num4_2 in result_data4_2:
-    #             nums = num4_0 + num4_1 + num4_2
-    #             numbers_data4.append(tuple(sorted(nums)))
-    # print({4:len(numbers_data4)})
+    numbers_data4 = []
+    for num4_0 in result_data4_0:
+        for num4_1 in result_data4_1:
+            for num4_2 in result_data4_2:
+                nums = num4_0 + num4_1 + num4_2
+                numbers_data4.append(tuple(sorted(nums)))
+    print({4:len(numbers_data4)})
 
     numbers_data5 = []
     for num5_0 in result_data5_0: 
         for num5_1 in result_data5_1: 
             for num5_2 in result_data5_2: 
-                for num5_3 in result_data5_3: 
-                    nums = num5_0 + num5_1 + num5_2 + num5_3
-                    numbers_data5.append(tuple(sorted(nums)))
+                nums = num5_0 + num5_1 + num5_2
+                numbers_data5.append(tuple(sorted(nums)))
 
     print({5:len(numbers_data5)})
 
-    #pd_4 = pandas.Index(numbers_data4)
+    pd_4 = pandas.Index(numbers_data4)
     pd_5 = pandas.Index(numbers_data5)
     numbers_data5 = None
     numbers_data4 = None
-    # share_4_5 = pd_4 & pd_5
+    share_4_5 = pd_4 & pd_5
     #pd_4 = None
     #pd_5 = None
     # print(len(share_4_5))
-
-    
-    
-
-    # numbers_data6 = []
-    # for num6_0 in result_data6_0: 
-    #     for num6_1 in result_data6_1: 
-    #         for num6_2 in result_data6_2: 
-    #             nums = num6_0 + num6_1 + num6_2
-    #             numbers_data6.append(tuple(sorted(nums)))
-
-    
-
-    # pd_data_5 = pandas.Index(numbers_data5)
-    # pd_data_6 = pandas.Index(numbers_data6)
-
-    # numbers_data5 = None
-    # numbers_data6 = None
-
-    # share_5_6 = pd_data_5 & pd_data_6
-    # pd_data_5 = None
-    # pd_data_6 = None
-    # print(len(share_5_6))
-    # # for item in share: 
-    # # #     print(item)
 
     result_data6_0 = list(combinations(data6_0,2))
     result_data6_1 = list(combinations(data6_1,3))
@@ -260,63 +220,78 @@ if __name__ == '__main__':
     result_data10_2 = list(combinations(data10_2,2))
     result_data10_3 = list(combinations(data10_3,1))
 
+    result_data11_0 = list(combinations(data11_0,2))
+    result_data11_1 = list(combinations(data11_1,3))
+    result_data11_2 = list(combinations(data11_2,2))
+    result_data11_3 = list(combinations(data11_3,1))
+
     numbers_data6 = []
     for num6_0 in result_data6_0: 
         for num6_1 in result_data6_1: 
             for num6_2 in result_data6_2: 
-                for num6_3 in result_data6_3: 
-                    nums = num6_0 + num6_1 + num6_2 + num6_3
-                    numbers_data6.append(tuple(sorted(nums)))
+                #for num6_3 in result_data6_3: 
+                nums = num6_0 + num6_1 + num6_2 
+                numbers_data6.append(tuple(sorted(nums)))
     print({6:len(numbers_data6)})
 
     numbers_data7 = []
     for num7_0 in result_data7_0: 
         for num7_1 in result_data7_1: 
             for num7_2 in result_data7_2: 
-                for num7_3 in result_data7_3: 
-                    nums = num7_0 + num7_1 + num7_2 + num7_3
-                    numbers_data7.append(tuple(sorted(nums)))
+                #for num7_3 in result_data7_3: 
+                nums = num7_0 + num7_1 + num7_2
+                numbers_data7.append(tuple(sorted(nums)))
     print({7:len(numbers_data7)})
 
     numbers_data8 = []
     for num8_0 in result_data8_0: 
         for num8_1 in result_data8_1: 
             for num8_2 in result_data8_2: 
-                for num8_3 in result_data8_3: 
-                    nums = num8_0 + num8_1 + num8_2+num8_3
-                    numbers_data8.append(tuple(sorted(nums)))
+                #for num8_3 in result_data8_3: 
+                nums = num8_0 + num8_1 + num8_2
+                numbers_data8.append(tuple(sorted(nums)))
     print({8:len(numbers_data8)})
 
     numbers_data9 = []
     for num9_0 in result_data9_0: 
         for num9_1 in result_data9_1: 
             for num9_2 in result_data9_2: 
-                for num9_3 in result_data9_3: 
-                    nums = num9_0 + num9_1 + num9_2 + num9_3
-                    numbers_data9.append(tuple(sorted(nums)))
+                #for num9_3 in result_data9_3: 
+                nums = num9_0 + num9_1 + num9_2
+                numbers_data9.append(tuple(sorted(nums)))
     print({9:len(numbers_data9)})
 
     numbers_data10 = []
     for num10_0 in result_data10_0: 
         for num10_1 in result_data10_1: 
             for num10_2 in result_data10_2: 
-                for num10_3 in result_data10_3: 
-                    nums = num10_0 + num10_1 + num10_2 + num10_3
-                    numbers_data10.append(tuple(sorted(nums)))
+                #for num10_3 in result_data10_3: 
+                nums = num10_0 + num10_1 + num10_2 
+                numbers_data10.append(tuple(sorted(nums)))
     print({10:len(numbers_data10)})
+
+    numbers_data11 = []
+    for num11_0 in result_data11_0: 
+        for num11_1 in result_data11_1: 
+            for num11_2 in result_data11_2: 
+                #for num11_3 in result_data11_3: 
+                    nums = num11_0 + num11_1 + num11_2
+                    numbers_data11.append(tuple(sorted(nums)))
+    print({11:len(numbers_data11)})
 
     pd_6 = pandas.Index(numbers_data6)
     pd_7 = pandas.Index(numbers_data7)
     pd_8 = pandas.Index(numbers_data8)
     pd_9 = pandas.Index(numbers_data9)
     pd_10 = pandas.Index(numbers_data10)
+    pd_11 = pandas.Index(numbers_data11)
     numbers_data6 = None
     numbers_data7 = None
     numbers_data8 = None
     numbers_data9 = None
     numbers_data10 = None
 
-    share_6_7_8_9_10 = pd_5 & pd_6 & pd_7 & pd_8 & pd_9 & pd_10
+    share_6_7_8_9_10 = pd_6 & pd_7 & pd_8 & pd_9 & pd_10
     pd_6 = None
     pd_7 = None
     pd_8 = None
@@ -324,12 +299,36 @@ if __name__ == '__main__':
     pd_10 = None
     print(len(share_6_7_8_9_10))
 
+    counts = []
+    for item in share_6_7_8_9_10: 
+        for num in item: 
+            if num not in counts: 
+                counts.append(num)
+    print(counts)
+
+    pd_fianal= share_6_7_8_9_10 & pd_11
+
+    print(len(pd_fianal))
+
+    list1 = list(share_4_5)
+    list1_len = len(list1)
+    list2 = list(share_6_7_8_9_10)
+    list2_len = len(list2)
+
+    finale_nums = []
+    for i in range(0,list1_len): 
+        num1 = list1[i]
+        for j in range(0,list2_len): 
+            num2 = list2[j]
+            if num2 in finale_nums: 
+                continue
+            if set(num1).issubset(set(num2)): 
+                finale_nums.append(num2)
+
     # temp_list1 = list(share_4_5)
     # temp_list2 = list(share_6_7_8_9_10)
 
-    #shareFinal = share_4_5 & share_6_7_8_9_10
-
-    print({'final': len(shareFinal)})
+    #  
 
 
 
