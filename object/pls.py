@@ -9,7 +9,195 @@ import csv
 import codecs
 import collections
 
+numbers = {
+    'first':{
+        1:{
+            0:1
+        },
+        2:{
+            0:1,1:1
+        },
+        3:{
+            0:1,1:1
+        },
+        4:{
+            0:1,1:1
+        },
+        5:{
+            0:1,1:1
+        },
+        6:{
+            0:1,1:1,2:1
+        },
+        7:{
+            0:1,1:1,2:1
+        },
+        8:{
+            0:1,1:1,2:1
+        },
+        9:{
+            0:1,1:1,2:1
+        },
+        10:{
+            0:1,1:1,2:1
+        },
+        11:{
+            0:1,1:1,2:1
+        },
+        12:{
+            0:1,1:1,2:1
+        },
+        13:{
+            0:1,1:1,2:1
+        },
+        14:{
+            0:1,1:1,2:1,3:1
+        },
+        15:{
+            0:1,1:1,2:1,3:1
+        },
+        16:{
+            0:1,1:1,2:1,3:1
+        },
+        17:{
+            0:1,1:1,2:1,3:1
+        },
+        18:{
+            0:1,1:1,2:1,3:1
+        },
+        19:{
+            0:1,1:1,2:1,3:1
+        },
+        20:{
+            0:1,1:1,2:1,3:1
+        },
+    },
+    'second':{
+        1:{
+            0:1
+        },
+        2:{
+            0:1,1:1
+        },
+        3:{
+            0:1,1:1
+        },
+        4:{
+            0:1,1:1
+        },
+        5:{
+            0:1,1:1
+        },
+        6:{
+            0:1,1:1,2:1
+        },
+        7:{
+            0:1,1:1,2:1
+        },
+        8:{
+            0:1,1:1,2:1
+        },
+        9:{
+            0:1,1:1,2:1
+        },
+        10:{
+            0:1,1:1,2:1
+        },
+        11:{
+            0:1,1:1,2:1
+        },
+        12:{
+            0:1,1:1,2:1
+        },
+        13:{
+            0:1,1:1,2:1
+        },
+        14:{
+            0:1,1:1,2:1,3:1
+        },
+        15:{
+            0:1,1:1,2:1,3:1
+        },
+        16:{
+            0:1,1:1,2:1,3:1
+        },
+        17:{
+            0:1,1:1,2:1,3:1
+        },
+        18:{
+            0:1,1:1,2:1,3:1
+        },
+        19:{
+            0:1,1:1,2:1,3:1
+        },
+        20:{
+            0:1,1:1,2:1,3:1
+        },
+    },
+    'third':{
+        1:{
+            0:1,1:1
+        },
+        2:{
+            0:1,1:1
+        },
+        3:{
+            0:1,1:1
+        },
+        4:{
+            0:1,1:1
+        },
+        5:{
+            0:1,1:1
+        },
+        6:{
+            0:1,1:1,2:1
+        },
+        7:{
+            0:1,1:1,2:1
+        },
+        8:{
+            0:1,1:1,2:1
+        },
+        9:{
+            0:1,1:1,2:1
+        },
+        10:{
+            0:1,1:1,2:1
+        },
+        11:{
+            0:1,1:1,2:1
+        },
+        12:{
+            0:1,1:1,2:1
+        },
+        13:{
+            0:1,1:1,2:1,3:1
+        },
+        14:{
+            0:1,1:1,2:1,3:1
+        },
+        15:{
+            0:1,1:1,2:1,3:1
+        },
+        16:{
+            0:1,1:1,2:1,3:1
+        },
+        17:{
+            0:1,1:1,2:1,3:1
+        },
+        18:{
+            0:1,1:1,2:1,3:1
+        },
+        19:{
+            0:1,1:1,2:1,3:1
+        },
+        20:{
+            0:1,1:1,2:1,3:1
+        },
+    }
 
+}
 class PLS: 
     def __init__(self,limit=100): 
         self.__limit=limit
@@ -94,36 +282,6 @@ class PLS:
             counts.append(count)
         return counts
 
-    # def search_frency_from_last(self,index,periods,mode='red'):
-    #     beegoFlag = False
-    #     if mode == 'red': 
-    #         current_red = self.__red_numbers[index]
-    #         last_data = self.__red_numbers[index+1:index+periods+1]
-    #     elif mode == 'blue':
-    #         current_red = self.__blue_numbers[index]
-    #         last_data = self.__blue_numbers[index+1:index+periods+1]
-    #     thoery_data_frency = thoery_data[mode][periods]
-    #     returnDic = {}
-    #     for num in current_red: 
-    #         returnDic[num] = 0
-    #     for data in last_data: 
-    #         for num in current_red: 
-    #             if num in data: 
-    #                 returnDic[num] += 1
-    #     returnList = []
-    #     for _,value in returnDic.items():
-    #         returnList.append(value)
-    #     counter = Counter(returnList)
-    #     beegoFlag = True
-    #     for key,value in counter.items(): 
-    #         if key in thoery_data_frency.keys() and value <= thoery_data_frency[key]:
-    #             pass
-    #         else: 
-    #             beegoFlag = False
-    #             break
-    #     return current_red,returnList,beegoFlag
-
-    
     def number_last_appear_theory_times(self,periods,mode='first'): 
         counts = self.numbers_last_appear_times_probability(periods,mode)
         counter = Counter(counts)
@@ -131,6 +289,38 @@ class PLS:
         for key,value in counter.items(): 
             returnDic[key] = value / self.count
         return returnDic
+
+    def search_frency_from_last(self,index,periods,mode='first'):
+        beegoFlag = False
+        if mode == 'first': 
+            current_red = [self.firstNumbers[index]]
+            last_data = self.firstNumbers[index+1:index+periods+1]
+        elif mode == 'second':
+            current_red = [self.secondNumbers[index]]
+            last_data = self.secondNumbers[index+1:index+periods+1]
+        elif mode == 'third':
+            current_red = [self.thirdNumbers[index]]
+            last_data = self.thirdNumbers[index+1:index+periods+1]
+        thoery_data_frency = numbers[mode][periods]
+        returnDic = {}
+        for num in current_red: 
+            returnDic[num] = 0
+        for data in last_data: 
+            for num in current_red: 
+                if num == data: 
+                    returnDic[num] += 1
+        returnList = []
+        for _,value in returnDic.items():
+            returnList.append(value)
+        counter = Counter(returnList)
+        beegoFlag = True
+        for key,value in counter.items(): 
+            if key in thoery_data_frency.keys() and value <= thoery_data_frency[key]:
+                pass
+            else: 
+                beegoFlag = False
+                break
+        return current_red,returnList,beegoFlag
 
 
     def __number_last_appaer_time_probability(self,current_num,last_numbers,mode='first'):
