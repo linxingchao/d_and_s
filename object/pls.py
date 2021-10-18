@@ -1,3 +1,4 @@
+from itertools import count
 from typing import Counter
 from object.lottery import Lottery
 
@@ -8,6 +9,7 @@ import pandas as pd
 import csv
 import codecs
 import collections
+from itertools import combinations
 
 numbers = {
     'first':{
@@ -198,6 +200,30 @@ numbers = {
     }
 
 }
+
+data_times = {
+    1:[{0:1}],
+    2:[{0:1}],
+    3:[{0:1}],
+    4:[{0:1}],
+    5:[{0:1}],
+    6:[{0:1}],
+    7:[{0:1},{2:1}],
+    8:[{0:1},{1:1}],
+    9:[{0:1},{1:1}],
+    10:[{0:1},{1:1}],
+    11:[{0:1},{1:1}],
+    12:[{0:1},{1:1}],
+    13:[{0:1},{1:1}],
+    14:[{0:1},{1:1},{2:1}],
+    15:[{0:1},{1:1},{2:1}],
+    16:[{1:1},{2:1},],
+    17:[{1:1},{2:1}],
+    18:[{1:1},{2:1}],
+    19:[{1:1},{2:1}],
+    20:[{1:1},{2:1}],
+
+}
 class PLS: 
     def __init__(self,limit=100): 
         self.__limit=limit
@@ -313,14 +339,25 @@ class PLS:
         for _,value in returnDic.items():
             returnList.append(value)
         counter = Counter(returnList)
-        beegoFlag = True
-        for key,value in counter.items(): 
-            if key in thoery_data_frency.keys() and value <= thoery_data_frency[key]:
-                pass
-            else: 
-                beegoFlag = False
-                break
+        if counter in data_times[periods]: 
+            beegoFlag = True
+        
         return current_red,returnList,beegoFlag
+
+    def number_next_appear_all(self,period,mode='first'):
+        data = self.numbers_appear_time_in_last_periods(period,mode)
+        data_time = data_times[period]
+        nums = []
+        for item in data_time: 
+            if set(item.keys()).issubset(set(data.keys())): 
+                #data_list = []
+                for key,value in item.items(): 
+                    temp_data = combinations(data[key],value)
+                    for t_d in temp_data:
+                        nums.append(t_d)
+                #ount = len(data_list)
+
+        return nums
 
 
     def __number_last_appaer_time_probability(self,current_num,last_numbers,mode='first'):

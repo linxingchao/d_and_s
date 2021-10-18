@@ -8,6 +8,7 @@ import pandas as pd
 import csv
 import codecs
 import collections
+from itertools import combinations
 
 thoery_data = {
     'red':{
@@ -15,21 +16,21 @@ thoery_data = {
             0:5,1:1
         },
         2:{
-            0:5,1:1
+            0:5,1:2,
         },
         3:{
             #6
             0:4,1:2,2:1
         },
         4:{
-            #7
-            0:3,1:3,2:1
+            #6
+            0:3,1:2,2:1
         },
         5:{ # 7
-            0:3,1:3,2:1
+            0:3,1:2,2:1
         },
         6:{ #8
-            0:2,1:3,2:2,3:1
+            0:3,1:3,2:1,3:1
         },
         7:{#8
             0:2,1:3,2:2,3:1
@@ -77,6 +78,48 @@ thoery_data = {
         }
     },
     'blue':{
+
+    }
+}
+
+# data_times = {
+#     'red':{
+#         1:[{0:5},{0:4,1:1}],
+#         2:[{0:5},{0:3,1:2},{0:4,1:1},{}],
+#         3:[{1:3,0:2},{0:4,1:1},{0:3,1:2}],
+#         4:[{0:4,1:1},{0:3,1:2},{1:3,0:2}],
+#         5:[{0:2,1:2,2:1},{0:3,1:2},{1:3,0:2},{0:3,2:1,1:1}],
+#         6:[{0:2,1:2,2:1},{0:3,1:2},{2:2,1:2,0:1},
+#             {0:3,2:1,1:1},{1:3,2:1,0:1},{1:3, 0:2},{0:2,2:2,1:1}],
+#         7:[{1: 3, 2: 1, 0: 1},{1: 3, 0: 2},{0: 3, 2: 1, 1: 1},\
+#             {2: 2, 1: 2, 0: 1},{0: 2, 1: 2, 2: 1},{2: 2, 0: 2, 1: 1},\
+#             {1: 4, 0: 1},{1: 2, 2: 1, 0: 1, 3: 1},{0: 3, 1: 2}],
+#         8:[{1: 3, 2: 1, 0: 1},{1: 2, 0: 2, 2: 1},{2: 2, 1: 2, 0: 1},\
+#             {1: 2, 2: 1, 3: 1, 0: 1},{0: 3, 2: 1, 1: 1},{0: 2, 1: 1, 3: 1, 2: 1},\
+#             {0: 2, 2: 2, 1: 1},{1: 3, 2: 2}],
+#         9:[{1: 2, 2: 2, 0: 1},{1: 2, 0: 2, 2: 1},{1: 3, 0: 1, 2: 1},\
+#             {1: 2, 2: 1, 0: 1, 3: 1},{2: 2, 0: 2, 1: 1},{0: 2, 3: 1, 2: 1, 1: 1},\
+#             {1: 3, 3: 1, 2: 1},{1: 3, 2: 2}],
+#         10:[{1: 2, 2: 2, 0: 1},{1: 2, 0: 1, 2: 1, 3: 1},{1: 3, 0: 1, 2: 1},{2: 2, 1: 2, 3: 1},{1: 2, 0: 2, 2: 1},\
+#             {2: 2, 3: 1, 1: 1, 0: 1},{2: 2, 0: 2, 1: 1}]
+
+#     }
+# }
+
+data_times = {
+    'red':{
+        1:[{0:4,1:1},{0:5}],
+        2:[{0:4,1:1},{0:3,1:2}],
+        3:[ {0:3,1:2},{1:3,0:2},{0:4,1:1}],
+        4:[{0: 3, 1: 2},{0: 4, 1: 1},{1: 3, 0: 2},\
+            {0: 3, 2: 1, 1: 1},{1: 2, 0: 2, 2: 1}],
+        5:[{1: 3, 0: 2},{0: 3, 2: 1, 1: 1},{1: 2, 0: 2, 2: 1},{0: 3, 1: 2}],
+        6:[{0: 3, 1: 2},{0: 3, 2: 1, 1: 1},{1: 3, 0: 2},{1: 3, 2: 1, 0: 1}],
+        7:[{1: 3, 2: 1, 0: 1},{2: 2, 1: 2, 0: 1},{0: 3, 2: 1, 1: 1},\
+            {1: 3, 0: 2},{2: 2, 0: 2, 1: 1}],
+        8:[{1: 3, 2: 1, 0: 1},{1: 2, 0: 2, 2: 1},{2: 2, 1: 2, 0: 1},{1: 2, 2: 1, 3: 1, 0: 1}],
+        9:[{1: 2, 2: 2, 0: 1},{1: 2, 0: 2, 2: 1},{1: 3, 0: 1, 2: 1},{1: 2, 2: 1, 0: 1, 3: 1}],
+        10:[{1: 2, 2: 2, 0: 1},{1: 2, 0: 1, 2: 1, 3: 1}]
 
     }
 }
@@ -202,6 +245,7 @@ class DLT(Lottery):
             current_red = self.__blue_numbers[index]
             last_data = self.__blue_numbers[index+1:index+periods+1]
         thoery_data_frency = thoery_data[mode][periods]
+        data_time = data_times[mode][periods]
         returnDic = {}
         for num in current_red: 
             returnDic[num] = 0
@@ -213,20 +257,11 @@ class DLT(Lottery):
         for _,value in returnDic.items():
             returnList.append(value)
         counter = Counter(returnList)
-        beegoFlag = True
-        for key,value in counter.items(): 
-            if key in thoery_data_frency.keys() and value <= thoery_data_frency[key]:
-                pass
-            else: 
-                beegoFlag = False
-                break
+        if counter in data_time: 
+            beegoFlag = True
         return current_red,returnList,beegoFlag
 
 
-
-
-
-    
     def number_last_appear_theory_times(self,periods,mode='red'): 
         dic = self.numbers_last_appear_times_probability(periods,mode)
         count = self.__count
@@ -234,6 +269,53 @@ class DLT(Lottery):
         for key,value in dic.items(): 
             returnDic[key] = value / count
         return returnDic
+
+    def number_next_appear_all(self,period,mode='red'): 
+        data = self.numbers_appear_time_in_last_periods(period)
+        data_time = data_times[mode][period]
+        nums = []
+        for item in data_time: 
+            if set(item.keys()).issubset(set(data.keys())): 
+                data_list = []
+                for key,value in item.items(): 
+                    temp_data = list(combinations(data[key],value))
+                    data_list.append(temp_data)
+                count = len(data_list)
+                
+                if count == 1: 
+                    for d in data_list[0]: 
+                        d = tuple(sorted(d))
+                        nums.append(d)
+                elif count == 2: 
+                    for d1 in data_list[0]: 
+                        for d2 in data_list[1]: 
+                            d = tuple(sorted(d1+d2))
+                            nums.append(d)
+                elif count == 3: 
+                     for d1 in data_list[0]: 
+                        for d2 in data_list[1]: 
+                            for d3 in data_list[2]:
+                                d = tuple(sorted(d1+d2+d3))
+                                nums.append(d)
+                elif count == 4: 
+                    for d1 in data_list[0]: 
+                        for d2 in data_list[1]: 
+                            for d3 in data_list[2]:
+                                for d4 in data_list[3]:
+                                    d = tuple(sorted(d1+d2+d3+d4))
+                                    nums.append(d)
+                elif count == 5: 
+                    for d1 in data_list[0]: 
+                        for d2 in data_list[1]: 
+                            for d3 in data_list[2]:
+                                for d4 in data_list[3]:
+                                    for d5 in data_list[4]:
+                                        d = tuple(sorted(d1+d2+d3+d4+d5))
+                                        nums.append(d)
+        return nums 
+
+            
+
 
 
     def __number_last_appaer_time_probability(self,current_num,last_numbers,mode='red'):
