@@ -244,7 +244,7 @@ class DLT(Lottery):
         elif mode == 'blue':
             current_red = self.__blue_numbers[index]
             last_data = self.__blue_numbers[index+1:index+periods+1]
-        thoery_data_frency = thoery_data[mode][periods]
+        #thoery_data_frency = thoery_data[mode][periods]
         data_time = data_times[mode][periods]
         returnDic = {}
         for num in current_red: 
