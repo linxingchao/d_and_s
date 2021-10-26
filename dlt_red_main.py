@@ -17,7 +17,7 @@ import pandas
 if __name__ == '__main__':
     csv_path = 'E:/work/d_and_s/Lottery_data.csv'.replace('/', path.sep)
     dlt = DLT()
-    dlt.search_data_from_net(1,21119)
+    dlt.search_data_from_net(1,21120)
 
    
 
@@ -69,7 +69,7 @@ if __name__ == '__main__':
 
     nums1 = dlt.number_next_appear_all(1)
     pd = pandas.Index(nums1)
-    for i in range(2,8): 
+    for i in range(2,7): 
         nums = dlt.number_next_appear_all(i)
         tem_pd = pandas.Index(nums)
         pd = pd & tem_pd
@@ -80,16 +80,25 @@ if __name__ == '__main__':
 
     datas = list(pd)
     test1 = []
-    #no_numbers = [1,2,3,6,7,8,11,21,23,24,25,29,33,35]
-    for d in datas: 
-        dd1 = [d1 for d1 in d if d1 <10]
-        dd2 = [d1 for d1 in d if d1 >=10 and d1 < 20]
-        dd3 = [d1 for d1 in d if d1 >=20 and d1 < 30]
-        dd4 = [d1 for d1 in d if d1 >=30 and d1 < 36]
-        if len(dd1) == 0 and len(dd2) == 2 and len(dd3) == 2 and len(dd4) == 1: 
-           test1.append(d)
+    no_numbers = [1,7,8,11,13,14,15,16,17,18,28,29,30,34,35]
+    for d in datas:
+        dd = [d1 for d1 in d if d1 in no_numbers]
+        if not dd:
+            test1.append(d) 
+        # dd1 = [d1 for d1 in d if d1 <10]
+        # dd2 = [d1 for d1 in d if d1 >=10 and d1 < 20]
+        # dd3 = [d1 for d1 in d if d1 >=20 and d1 < 30]
+        # dd4 = [d1 for d1 in d if d1 >=30 and d1 < 36]
+        # if len(dd1) == 0 and len(dd2) == 2 and len(dd3) == 2 and len(dd4) == 1: 
+        #    test1.append(d)
 
     print(len(test1))
+    #for ddd in test1: 
+    with open('numbers.csv','w') as file: 
+        writer = csv.writer(file)
+        writer.writerows(test1)
+
+        #print(ddd)
     last_num = []
     for dd in datas:
         for d in dd:
