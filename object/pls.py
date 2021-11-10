@@ -19,8 +19,8 @@ data_times = {
         4:[{1: 2, 2: 1},{1: 2, 0: 1},{2: 1, 1: 1, 0: 1},{2: 2, 1: 1},{2: 2, 0: 1},{3: 1, 0: 1, 1: 1}],
         5:[{1: 2, 2: 1},{2: 2, 1: 1},{2: 1, 0: 1, 1: 1},{3: 1, 1: 1, 2: 1},{3: 1, 1: 1, 0: 1},{1: 2, 3: 1}],
         6:[{2: 2, 1: 1},{1: 1, 2: 1, 3: 1},{1: 2, 2: 1},{2: 2, 3: 1},{1: 2, 3: 1},{2: 1, 0: 1, 1: 1}],
-        7:[],
-        8:[],
+        7:[{1: 1, 2: 1, 3: 1},{2: 2, 3: 1},{2: 2, 1: 1},{4: 1, 1: 1, 2: 1},{1: 2, 2: 1},{3: 2, 2: 1},{1: 2, 3: 1}],
+        8:[{3: 1, 1: 1, 2: 1},{2: 2, 3: 1},{4: 1, 1: 1, 3: 1},{4: 1, 1: 1, 2: 1},{4: 1, 3: 1, 2: 1},{2: 2, 1: 1},{3: 2, 1: 1}],
         9:[],
         10:[]
     }
@@ -48,7 +48,8 @@ class PLS:
             tds = trs[index].find_all('td')
             numbers = tds[1].text.split(' ')
             temp_nums = sorted([int(numbers[0]),int(numbers[1]),int(numbers[2])])
-            self.numbers.append(temp_nums)
+            temp_mum1 = [int(numbers[0]),int(numbers[1]),int(numbers[2])]
+            self.numbers.append(temp_mum1)
             tem_counter = Counter(temp_nums)
             if len(tem_counter.keys()) == 3: 
                 self.complex_num_6.append(temp_nums)
@@ -68,7 +69,7 @@ class PLS:
     def numbers_appear_time_in_last_periods(self,periods):
         Dic = {}
         data = self.complex_num_6[:periods]
-        for i in range(0,9): 
+        for i in range(0,10): 
             Dic[i] = 0
         for numbers in data: 
             tem_counter = Counter(numbers)
@@ -157,7 +158,48 @@ class PLS:
         return nums 
 
             
+    def number_no_apear_in_periods(self,index,last_periods): 
+        nums = self.numbers[index]
+        last_nums = self.numbers[index+1:last_periods+index +1]
+        temp_nums = set()
+        for last in last_nums: 
+            temp_nums = temp_nums.union(set(last))
+        numSet = set(nums)
+        temSet = numSet.intersection(temp_nums)
+        if temSet: 
+            return False,len(temp_nums)
+        else: 
+            return True,len(temp_nums)
 
+    def number_has_appear_in_periods(self,index,last_periods): 
+        all_set = set([0,1,2,3,4,5,6,7,8,9])
+        nums = self.numbers[index]
+        last_nums = self.numbers[index+1:last_periods+index+1]
+        temmp_nums = set()
+        for last in last_nums: 
+            temmp_nums = temmp_nums.union(set(last))
+        num_set = set(nums)
+        retain_set = all_set.difference(temmp_nums)
+        if num_set.issubset(temmp_nums): 
+            return True,len(temmp_nums),len(num_set.difference(retain_set))
+        else: 
+            return False,len(temmp_nums),len(num_set.difference(retain_set))
+
+    def number_has_perios_in_periods(self,index,last_periods): 
+        all_set = set([0,1,2,3,4,5,6,7,8,9])
+        nums = self.numbers[index]
+        last_nums = self.numbers[index+1:last_periods+index+1]
+        temmp_nums = set()
+        for last in last_nums: 
+            temmp_nums = temmp_nums.union(set(last))
+        num_set = set(nums)
+        retain_set = all_set.difference(temmp_nums)
+        after_set = num_set.difference(temmp_nums)
+        return {'front':len(num_set) - len(after_set),'after':len(after_set),'front_num':temmp_nums,'after_num':retain_set}
+
+    
+
+            
 
 
     def __number_last_appaer_time_probability(self,current_num,last_numbers):

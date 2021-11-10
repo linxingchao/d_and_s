@@ -137,18 +137,22 @@ thoery_data = {
 
 data_times = {
     'red':{
-        1:[{0:5}],
-        2:[{0:4,1:1}],
-        3:[ {0:3,1:2},{0:4,1:1}],
-        4:[{0: 3, 1: 2},{0: 4, 1: 1},{1: 3, 0: 2},\
-            {0: 3, 2: 1, 1: 1},{1: 2, 0: 2, 2: 1}],
-        5:[{1: 3, 0: 2},{0: 3, 2: 1, 1: 1},{1: 2, 0: 2, 2: 1},{0: 3, 1: 2}],
-        6:[{0: 3, 1: 2},{0: 3, 2: 1, 1: 1},{1: 3, 0: 2},{1: 3, 2: 1, 0: 1}],
-        7:[{1: 3, 2: 1, 0: 1},{2: 2, 1: 2, 0: 1},{0: 3, 2: 1, 1: 1},\
-            {1: 3, 0: 2},{2: 2, 0: 2, 1: 1}],
-        8:[{1: 3, 2: 1, 0: 1},{1: 2, 0: 2, 2: 1},{2: 2, 1: 2, 0: 1},{1: 2, 2: 1, 3: 1, 0: 1}],
-        9:[{1: 2, 2: 2, 0: 1},{1: 2, 0: 2, 2: 1},{1: 3, 0: 1, 2: 1},{1: 2, 2: 1, 0: 1, 3: 1}],
-        10:[{1: 2, 2: 2, 0: 1},{1: 2, 0: 1, 2: 1, 3: 1}]
+        1:[{0: 5}],
+        2:[{0: 4, 1: 1}],
+        3:[ {0: 4, 1: 1}],
+        4:[{0: 4, 1: 1}],
+        5:[{0: 4, 1: 1}],
+        6:[{0: 4, 1: 1}],
+        7:[{0: 3, 1: 2}],
+        8:[{1: 3, 0: 2}],
+        9:[{1: 4, 0: 1}],
+        10:[{1: 3, 0: 1, 2: 1}],
+        11:[{1: 3, 0: 2}],
+        12:[{1: 3, 0: 2}],
+        13:[{1: 3, 0: 2}],
+        14:[{1: 3, 0: 2}],
+        15:[{1: 3, 0: 2}],
+        16:[{1: 3, 0: 2}],
     },
     'blue':{
         1:[{0: 2},{1: 1, 0: 1}],
@@ -160,9 +164,43 @@ data_times = {
         7:[{0: 1, 1: 1},{2: 1, 0: 1},{1: 2},{2: 1, 1: 1}],
         8:[{2: 1, 1: 1},{0: 1, 1: 1},{1: 2},{0: 1, 2: 1},{3: 1, 1: 1}],
         9:[{2: 1, 1: 1},{0: 1, 1: 1},{1: 2},{2: 1, 0: 1},{3: 1, 1: 1}],
-        10:[{2: 1, 1: 1},{1: 2},{3: 1, 1: 1},{2: 1, 3: 1},{2: 1, 0: 1},{1: 1, 0: 1}]
+        10:[{2: 1, 1: 1},{1: 2},{3: 1, 1: 1},{2: 1, 3: 1},{2: 1, 0: 1},{1: 1, 0: 1}],
+        11:[{2: 1, 1: 1}],
+        12:[{2: 1, 1: 1}],
+        13:[{2: 1, 1: 1}],
+        14:[{2: 1, 1: 1}],
+        15:[{2: 1, 1: 1}],
+        16:[{2: 1, 1: 1}],
+        
     }
 }
+
+# data_times = {
+#     'red':{
+#         1:[{0:5}],
+#         2:[{0:4,1:1}],
+#         3:[ {0:3,1:2},{0:4,1:1}],
+#         4:[{0: 3, 1: 2},{0: 4, 1: 1}],
+#         5:[{1: 3, 0: 2},{0: 3, 2: 1, 1: 1}],
+#         6:[{0: 3, 1: 2},{0: 3, 2: 1, 1: 1}],
+#         7:[{1: 3, 2: 1, 0: 1},{2: 2, 1: 2, 0: 1}],
+#         8:[{1: 3, 2: 1, 0: 1},{1: 2, 0: 2, 2: 1}],
+#         9:[{1: 2, 2: 2, 0: 1},{1: 2, 0: 2, 2: 1}],
+#         10:[{1: 2, 2: 2, 0: 1},{1: 2, 0: 1, 2: 1, 3: 1}]
+#     },
+#     'blue':{
+#         1:[{0: 2},{1: 1, 0: 1}],
+#         2:[{0: 2},{0: 1, 1: 1}],
+#         3:[{0: 1, 1: 1},{0: 2},{1: 2}],
+#         4:[{0: 1, 1: 1},{0: 2},{1: 2},{0: 1, 2: 1}],
+#         5:[{0: 1, 1: 1},{1: 2},{0: 1, 2: 1},{0: 2}],
+#         6:[{0: 1, 1: 1},{0: 1, 2: 1},{2: 1, 1: 1},{1: 2},{0: 2}],
+#         7:[{0: 1, 1: 1},{2: 1, 0: 1},{1: 2},{2: 1, 1: 1}],
+#         8:[{2: 1, 1: 1},{0: 1, 1: 1},{1: 2},{0: 1, 2: 1},{3: 1, 1: 1}],
+#         9:[{2: 1, 1: 1},{0: 1, 1: 1},{1: 2},{2: 1, 0: 1},{3: 1, 1: 1}],
+#         10:[{2: 1, 1: 1},{1: 2},{3: 1, 1: 1},{2: 1, 3: 1},{2: 1, 0: 1},{1: 1, 0: 1}]
+#     }
+# }
 
 class DLT(Lottery): 
     def __init__(self): 
@@ -255,7 +293,30 @@ class DLT(Lottery):
             if value not in returnDic.keys(): 
                 returnDic[value] = []
             returnDic[value].append(key)
-        return returnDic           
+        return returnDic   
+    
+    def numbers_appear_time_in_last_periods_for_index(self,index,periods,mode='red'):
+        Dic = {}
+        if mode == 'red': 
+            data = self.__red_numbers[index:index+periods]
+            for i in range(1,36): 
+                 Dic[i] = 0
+        elif mode == 'blue': 
+            data = self.__blue_numbers[index:index+periods]
+            for i in range(1,13): 
+                Dic[i] = 0
+        else: 
+            raise Exception('Mode error')
+
+        for numbers in data: 
+            for num in numbers: 
+                Dic[num] += 1
+        returnDic = {}
+        for key,value in Dic.items(): 
+            if value not in returnDic.keys(): 
+                returnDic[value] = []
+            returnDic[value].append(key)
+        return returnDic         
 
     # 中奖号码，在之前期数中出现的次数频率，
     def numbers_last_appear_times_probability(self,periods,mode='red'):
@@ -300,7 +361,6 @@ class DLT(Lottery):
         if counter in data_time: 
             beegoFlag = True
         return current_red,returnList,beegoFlag
-
 
     def number_last_appear_theory_times(self,periods,mode='red'): 
         dic = self.numbers_last_appear_times_probability(periods,mode)
@@ -353,8 +413,140 @@ class DLT(Lottery):
                                         d = tuple(sorted(d1+d2+d3+d4+d5))
                                         nums.append(d)
         return nums 
+    
+    def number_next_appear_all_real(self,period,beego_times,mode='red'): 
+        data = self.numbers_appear_time_in_last_periods(period,mode)
+        data_time = beego_times[period]
+        nums = []
+        for item in data_time: 
+            if set(item.keys()).issubset(set(data.keys())): 
+                data_list = []
+                for key,value in item.items(): 
+                    temp_data = list(combinations(data[key],value))
+                    data_list.append(temp_data)
+                count = len(data_list)
+                
+                if count == 1: 
+                    for d in data_list[0]: 
+                        d = tuple(sorted(d))
+                        nums.append(d)
+                elif count == 2: 
+                    for d1 in data_list[0]: 
+                        for d2 in data_list[1]: 
+                            d = tuple(sorted(d1+d2))
+                            nums.append(d)
+                elif count == 3: 
+                     for d1 in data_list[0]: 
+                        for d2 in data_list[1]: 
+                            for d3 in data_list[2]:
+                                d = tuple(sorted(d1+d2+d3))
+                                nums.append(d)
+                elif count == 4: 
+                    for d1 in data_list[0]: 
+                        for d2 in data_list[1]: 
+                            for d3 in data_list[2]:
+                                for d4 in data_list[3]:
+                                    d = tuple(sorted(d1+d2+d3+d4))
+                                    nums.append(d)
+                elif count == 5: 
+                    for d1 in data_list[0]: 
+                        for d2 in data_list[1]: 
+                            for d3 in data_list[2]:
+                                for d4 in data_list[3]:
+                                    for d5 in data_list[4]:
+                                        d = tuple(sorted(d1+d2+d3+d4+d5))
+                                        nums.append(d)
+        return nums 
+    
+    def number_next_appear_all_real_for_index(self,index,period,beego_times,mode='red'): 
+        data = self.numbers_appear_time_in_last_periods_for_index(index,period,mode)
+        data_time = beego_times[period]
+        nums = []
+        for item in data_time: 
+            if set(item.keys()).issubset(set(data.keys())): 
+                data_list = []
+                for key,value in item.items(): 
+                    temp_data = list(combinations(data[key],value))
+                    data_list.append(temp_data)
+                count = len(data_list)
+                
+                if count == 1: 
+                    for d in data_list[0]: 
+                        d = tuple(sorted(d))
+                        nums.append(d)
+                elif count == 2: 
+                    for d1 in data_list[0]: 
+                        for d2 in data_list[1]: 
+                            d = tuple(sorted(d1+d2))
+                            nums.append(d)
+                elif count == 3: 
+                     for d1 in data_list[0]: 
+                        for d2 in data_list[1]: 
+                            for d3 in data_list[2]:
+                                d = tuple(sorted(d1+d2+d3))
+                                nums.append(d)
+                elif count == 4: 
+                    for d1 in data_list[0]: 
+                        for d2 in data_list[1]: 
+                            for d3 in data_list[2]:
+                                for d4 in data_list[3]:
+                                    d = tuple(sorted(d1+d2+d3+d4))
+                                    nums.append(d)
+                elif count == 5: 
+                    for d1 in data_list[0]: 
+                        for d2 in data_list[1]: 
+                            for d3 in data_list[2]:
+                                for d4 in data_list[3]:
+                                    for d5 in data_list[4]:
+                                        d = tuple(sorted(d1+d2+d3+d4+d5))
+                                        nums.append(d)
+        return nums 
 
             
+    def number_section(self,current_num,min_num,max_num): 
+        if min(current_num) >= min_num and max(current_num) <= max_num: 
+            return True
+        else: 
+            return False
+
+    def number_section_frency(self,numList):
+        temList1 = []
+        chazhiList = [] 
+        for nums in numList: 
+            minNum = min(nums)
+            maxNum = max(nums)
+            chazhi = maxNum - minNum
+            temList1.append('%s_%s' %(minNum,maxNum))
+            chazhiList.append(chazhi)
+        return Counter(temList1),Counter(chazhiList)
+
+    def number_no_apear_in_periods(self,index,last_periods,mode='red'): 
+        if mode == 'red': 
+            numbers = self.Red_Numbers
+        else: 
+            numbers = self.Blue_Numbers
+        nums = numbers[index]
+        last_nums = numbers[index+1:last_periods+index +1]
+        temp_nums = set()
+        for last in last_nums: 
+            temp_nums = temp_nums.union(set(last))
+        numSet = set(nums)
+        if len(numSet.intersection(temp_nums)) > 0: 
+            return False,len(temp_nums)
+        else: 
+            return True,len(temp_nums)
+
+
+    def number_has_in_periods(self,index,start_periods,end_periods,mode='red'): 
+        if mode == 'red': 
+            numbers = self.Red_Numbers
+        else: 
+            numbers = self.Blue_Numbers
+        nums = numbers[index]
+        last_nums = numbers[index+1+start_periods:index+1+end_periods]
+        last_set = set()
+        for last in last_nums:
+            last_set = last_set.union(set(last)) 
 
 
 
