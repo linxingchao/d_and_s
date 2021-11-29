@@ -1,5 +1,4 @@
 from itertools import count
-from typing import Counter
 from object.lottery import Lottery
 
 from bs4 import BeautifulSoup   #引用BeautifulSoup库
@@ -10,6 +9,7 @@ import csv
 import codecs
 import collections
 from itertools import combinations
+from collections import Counter
 
 data_times = {
     'com_6':{
@@ -158,9 +158,17 @@ class PLS:
         return nums 
 
             
-    def number_no_apear_in_periods(self,index,last_periods): 
-        nums = self.numbers[index]
-        last_nums = self.numbers[index+1:last_periods+index +1]
+    def number_no_apear_in_periods(self,index,last_periods,mode='all'):
+        if mode == 'all': 
+            nums = self.numbers[index]
+            last_nums = self.numbers[index+1:last_periods+index +1]
+        elif mode == 'com_6': 
+            nums = self.complex_num_6[index]
+            last_nums = self.complex_num_6[index+1:last_periods+index +1]
+        elif mode == 'com_3': 
+            nums = self.complex_num_3[index] 
+            last_nums = self.complex_num_3[index+1:last_periods+index +1]
+        
         temp_nums = set()
         for last in last_nums: 
             temp_nums = temp_nums.union(set(last))
@@ -196,6 +204,26 @@ class PLS:
         retain_set = all_set.difference(temmp_nums)
         after_set = num_set.difference(temmp_nums)
         return {'front':len(num_set) - len(after_set),'after':len(after_set),'front_num':temmp_nums,'after_num':retain_set}
+    
+    
+    def number_appear_start_for_index(self,start,end,start_num,end_num): 
+        data = self.numbers[start:end]
+        count = 0
+        for d in data: 
+            if d[0]>=start_num and d[0] <= end_num: 
+                count += 1
+        return count
+    
+    def number_chazhi_for_index(self,start,end): 
+        data = self.numbers[start:end]
+        chazhi_list = []
+        for d in data: 
+            min_value = min(d)
+            max_value = max(d)
+            chazhi = max_value - min_value
+            chazhi_list.append(chazhi)
+        print(Counter(chazhi_list))
+            
 
     
 

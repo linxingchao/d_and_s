@@ -16,26 +16,39 @@ import pandas
 if __name__ == '__main__': 
     pls = PLS(6000)
     pls.search_data_from_net()
+    
+    
+    count = 0
+    
+    for i in range(100): 
+        data = pls.number_no_apear_in_periods(i,2,'com_3')
+        if data[0]: 
+            count += 1
+    print(count)
+    
 
-    # nums = []
-    # for num1 in combinations([0,1,2,3,4,5,6,7,8,9],1): 
-    #     for num2 in combinations([0,1,2,3,4,5,6,7,8,9],1):
-    #         for num3 in combinations([0,1,2,3,4,5,6,7,8,9],1):
-    #             temp_num = num1 + num2 + num3
-    #             nums.append(temp_num)
-    # pd1 = pandas.Index(nums)
+    counter = pls.number_chazhi_for_index(0,100)
+    print(counter)
 
-    # nums2 = []
-    # [nums2.append(tuple(num)) for num in pls.numbers]
-    # pd2 = pandas.Index(nums2)
+    nums = []
+    for num1 in combinations([0,1,2,3,4,5,6,7,8,9],1): 
+        for num2 in combinations([0,1,2,3,4,5,6,7,8,9],1):
+            for num3 in combinations([0,1,2,3,4,5,6,7,8,9],1):
+                temp_num = num1 + num2 + num3
+                nums.append(temp_num)
+    pd1 = pandas.Index(nums)
 
-    # counter1 = Counter(nums2)
-    # #print(counter)
+    nums2 = []
+    [nums2.append(tuple(num)) for num in pls.numbers]
+    pd2 = pandas.Index(nums2)
 
-    # pd = pd1.difference(pd2)
+    counter1 = Counter(nums2)
+    #print(counter)
 
-    # li = list(pd)
-    # print(li)
+    pd = pd1.difference(pd2)
+
+    li = list(pd)
+    print(li)
 
 
     # count = 0
@@ -113,7 +126,13 @@ if __name__ == '__main__':
 
     # last_list = list(pd)
     # print(last_list)
-
+    
+    count = 0
+    for i in range(100): 
+        data = pls.number_has_appear_in_periods(i,4)
+        if data[0]: 
+            count += 1
+    print(count)
     count_1 = 0
     count_2 = 0
     count_3 = 0

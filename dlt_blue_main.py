@@ -14,25 +14,57 @@ import time
 import pandas
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':   
     csv_path = 'E:/work/d_and_s/Lottery_data.csv'.replace('/', path.sep)
+    test_list = []
     dlt = DLT()
-    dlt.search_data_from_net(1,21128)
-
+    dlt.search_data_from_net(1,21130)
+    for n in range(0,100): 
+        temp_str = ''
+        for i in range(1,5): 
+            data = dlt.search_frency_from_last(n,i,'blue')
+            temp_str += '<%s-%s>-' % (str(i),str(data[1]))
+        test_list.append(temp_str)
+    
+    counter = Counter(test_list)
+    for key,value in counter.items(): 
+        if value >5: 
+            print(key,value)
+                 
+    
+    test = {1:[{0:2}],2:[{0:2}],3:[{0:2}],4:[{0:1,1:1}]}
+    test1 = {1:[{0:2}],2:[{0:2}],3:[{0:2}],4:[{0:2}]}
+    test3 = {1:[{0:2}],2:[{0:1,1:1}],3:[{0:1,1:1}],4:[{0:1,1:1}]}
+    test4 = {1:[{0:2}],2:[{0:2}],3:[{0:1,1:1}],4:[{0:1,1:1}]}
+    test5 = {1:[{0:1,1:1}],2:[{0:1,1:1}],3:[{0:1,1:1}],4:[{0:1,1:1}]}
+    
+    all_test = [test,test1,test3,test4,test5]
+    
+    num1 = dlt.number_next_appear_all_real(n+1,1,test,'blue')
+    pd = pandas.Index(num1)
+    for i in range(2,5): 
+        nums = dlt.number_next_appear_all_real(n+1,i,test,'blue')
+        tem_pd = pandas.Index(nums)
+        pd = pd & tem_pd
+        nums = None
+        tem_pd = None
+    #print(len(pd))
+    datas = list(pd)
+    print(n,len(datas),datas)
+    
+    
+    
     for n in range(0,20): 
-        dlt = DLT()
-        dlt.search_data_from_net(1,21128-n)
         beego_times = {}
-        for i in range(1,16): 
-            data = dlt.search_frency_from_last(0,i,'blue')
+        for i in range(1,8): 
+            data = dlt.search_frency_from_last(n,i,'blue')
             beego_times[i] = [Counter(data[1])]
+    
             
-        dlt1 = DLT()
-        dlt1.search_data_from_net(1,21128-n-1)
-        num1 = dlt1.number_next_appear_all_real(1,beego_times,'blue')
+        num1 = dlt.number_next_appear_all_real(n+1,1,beego_times,'blue')
         pd = pandas.Index(num1)
-        for i in range(2,15): 
-            nums = dlt1.number_next_appear_all_real(i,beego_times,'blue')
+        for i in range(2,8): 
+            nums = dlt.number_next_appear_all_real(n+1,i,beego_times,'blue')
             tem_pd = pandas.Index(nums)
             pd = pd & tem_pd
             nums = None
@@ -40,6 +72,8 @@ if __name__ == '__main__':
         #print(len(pd))
         datas = list(pd)
         print(n,len(datas),datas)
+
+    
 
     # reds = dlt.Blue_Numbers
     # for j in range(1,11): 

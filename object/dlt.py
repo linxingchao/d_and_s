@@ -272,14 +272,14 @@ class DLT(Lottery):
                 dic[num] += 1
         return dic
 
-    def numbers_appear_time_in_last_periods(self,periods,mode='red'):
+    def numbers_appear_time_in_last_periods(self,index,periods,mode='red'):
         Dic = {}
         if mode == 'red': 
-            data = self.__red_numbers[0:periods]
+            data = self.__red_numbers[index:index+periods]
             for i in range(1,36): 
                  Dic[i] = 0
         elif mode == 'blue': 
-            data = self.__blue_numbers[:periods]
+            data = self.__blue_numbers[index:index+periods]
             for i in range(1,13): 
                 Dic[i] = 0
         else: 
@@ -360,7 +360,7 @@ class DLT(Lottery):
         counter = Counter(returnList)
         if counter in data_time: 
             beegoFlag = True
-        return current_red,returnList,beegoFlag
+        return current_red,sorted(returnList),beegoFlag
 
     def number_last_appear_theory_times(self,periods,mode='red'): 
         dic = self.numbers_last_appear_times_probability(periods,mode)
@@ -414,8 +414,8 @@ class DLT(Lottery):
                                         nums.append(d)
         return nums 
     
-    def number_next_appear_all_real(self,period,beego_times,mode='red'): 
-        data = self.numbers_appear_time_in_last_periods(period,mode)
+    def number_next_appear_all_real(self,index,period,beego_times,mode='red'): 
+        data = self.numbers_appear_time_in_last_periods(index,period,mode)
         data_time = beego_times[period]
         nums = []
         for item in data_time: 
